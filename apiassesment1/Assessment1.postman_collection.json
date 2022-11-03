@@ -1,0 +1,256 @@
+{
+	"info": {
+		"_postman_id": "84002637-64ec-498b-9a46-0f81f201de4a",
+		"name": "Assessment1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9359816"
+	},
+	"item": [
+		{
+			"name": "Create Incident",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// extract the response \r",
+							"\r",
+							"var resp=pm.response.json();\r",
+							"\r",
+							"//console.log(resp);\r",
+							"\r",
+							"// Extract sysid from the response\r",
+							"\r",
+							"console.log(resp.result.sys_id);\r",
+							"\r",
+							"var resp_SysID=resp.result.sys_id;\r",
+							"\r",
+							"\r",
+							"\r",
+							"//pm.globals.set(\"sysid\",resp.result.sys_id);\r",
+							"\r",
+							"pm.globals.set(\"sysid\",resp_SysID);\r",
+							"\r",
+							"\r",
+							"\r",
+							"var extractedGlobalvar=pm.globals.get(\"sysid\");\r",
+							"\r",
+							"console.log(extractedGlobalvar)\r",
+							"\r",
+							"pm.test(\"Created successfully\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "gE40dZHs%qX@",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"short_description\": \"Short created via postman mk\",\r\n    \"description\": \"Description added via postman mk\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseuri}}/api/now/table/incident?sysparm_fields=sys_id,description",
+					"host": [
+						"{{baseuri}}"
+					],
+					"path": [
+						"api",
+						"now",
+						"table",
+						"incident"
+					],
+					"query": [
+						{
+							"key": "sysparm_fields",
+							"value": "sys_id,description"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "gE40dZHs%qX@",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"short_description\": \"amended via postman mk\",\r\n    \"description\": \"Description updated via postman mk\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseuri}}/api/now/table/incident/{{sysid}}?sysparm_fields=sys_id,description",
+					"host": [
+						"{{baseuri}}"
+					],
+					"path": [
+						"api",
+						"now",
+						"table",
+						"incident",
+						"{{sysid}}"
+					],
+					"query": [
+						{
+							"key": "sysparm_fields",
+							"value": "sys_id,description"
+						},
+						{
+							"key": "description",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "gE40dZHs%qX@",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"short_description\": \"amended via postman rk\",\r\n    \"description\": \"Description updated via postman rk\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseuri}}/api/now/table/incident/{{sysid}}?sysparm_fields=sys_id,description",
+					"host": [
+						"{{baseuri}}"
+					],
+					"path": [
+						"api",
+						"now",
+						"table",
+						"incident",
+						"{{sysid}}"
+					],
+					"query": [
+						{
+							"key": "sysparm_fields",
+							"value": "sys_id,description"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "Leaf@1234",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "admin",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
